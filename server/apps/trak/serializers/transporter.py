@@ -26,10 +26,7 @@ class TransporterSerializer(TrakBaseSerializer):
 
     def to_internal_value(self, data):
         """Move fields related to handler to an internal handler dictionary."""
-        handler_internal = {}
-        for key in HandlerSerializer.Meta.fields:
-            if key in data:
-                handler_internal[key] = data.pop(key)
+        handler_internal = { key: data.pop(key) for key in HandlerSerializer.Meta.fields if key in data }
         data['handler'] = handler_internal
         internal = super().to_internal_value(data)
         return internal
