@@ -65,5 +65,4 @@ class SiteService:
         if Site.objects.filter(epa_site__epa_id=handler.epa_id).exists():
             site = Site.objects.get(epa_site__epa_id=handler.epa_id)
             return site
-        else:
-            return Site.objects.create(epa_site=handler, name=site_name)
+        return Site.objects.create(epa_site=handler, name=site_name)
